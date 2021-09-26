@@ -17,6 +17,18 @@
       "body": "React is UI framework",
       "author": "",
       "id": 3
+    },
+    {
+      "title": "angular",
+      "body": "angular is JS framework",
+      "author": "ABC",
+      "id": 4
+    }
+  ],
+  "users": [
+    {
+      "username": "abc",
+      "password": 123
     }
   ]
 }

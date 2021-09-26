@@ -1,9 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useHistory, useLocation } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 
 const Create = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
-    const [author, setAuthor] = useState('');
+    const [author, setAuthor] = useState('ABC');
+    const history = useHistory();
+    const query = new URLSearchParams(useLocation().search);
+    const id = query.get('id');
+
+    const { data: blog, error, isPending } = useFetch('http://localhost:9001/blogs/' + id);
+
+    console.log('URLSearchParams', blog);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -14,10 +23,14 @@ const Create = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(blog)
         }).then(() => {
-            console.log('New Blog addedd')
+            console.log('New Blog addedd');
+            history.push('/home');
         })
         console.log(blog);
     }
+
+
+    console.log('author', author)
     return (
         <div className="create">
             <h2>Add a New Blog</h2>
